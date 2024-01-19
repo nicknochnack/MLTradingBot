@@ -2,8 +2,6 @@
 Build a trader bot which looks at sentiment of live news events and trades appropriately. 
 
 ## See it live and in action 📺
-
-<!-- ![GIF Demo](https://i.imgur.com/pejVjcu.gif) -->
 <img src="https://i.imgur.com/FaQH8rz.png"/>
 
 # Startup 🚀
@@ -18,8 +16,6 @@ Build a trader bot which looks at sentiment of live news events and trades appro
 <a href="pytorch.org/">PyTorch Installation Instructions</a></p>
 
 </br>
-<img src="https://i.imgur.com/oFrnT6q.png" width="400" height="300" />
-
 # Other References 🔗
 
 <p>-<a href="github.com/Lumiwealth/lumibot)">Lumibot</a>:trading bot library, makes lifecycle stuff easier .</p>
