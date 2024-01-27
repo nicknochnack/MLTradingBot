@@ -15,7 +15,7 @@ Build a trader bot which looks at sentiment of live news events and trades appro
 <p>N.B. Torch installation instructions will vary depending on your operating system and hardware. See here for more: 
 <a href="pytorch.org/">PyTorch Installation Instructions</a></p>
 
-<p>If you're getting an SSL error when you attempt to call out to the Alpaca Trading api, you'll need to install the required SSL certificates into your machine.</p>
+If you're getting an SSL error when you attempt to call out to the Alpaca Trading api, you'll need to install the required SSL certificates into your machine.
 1. Download the following intermediate SSL Certificates, these are required to communicate with Alpaca
 * https://letsencrypt.org/certs/lets-encrypt-r3.pem 
 * https://letsencrypt.org/certs/isrg-root-x1-cross-signed.pem 
