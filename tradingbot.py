@@ -18,11 +18,11 @@ ALPACA_CREDS = {
 }
 
 class MLTrader(Strategy): 
-    def initialize(self, symbol:str="SPY", cash_at_risk:float=.5): 
-        self.symbol = symbol
+    def initialize(self): 
+        self.symbol = self.parameters['symbol']
         self.sleeptime = "24H" 
         self.last_trade = None 
-        self.cash_at_risk = cash_at_risk
+        self.cash_at_risk = self.parameters['cash_at_risk']
         self.api = REST(base_url=BASE_URL, key_id=API_KEY, secret_key=API_SECRET)
 
     def position_sizing(self): 
@@ -80,9 +80,7 @@ class MLTrader(Strategy):
 start_date = datetime(2020,1,1)
 end_date = datetime(2023,12,31) 
 broker = Alpaca(ALPACA_CREDS) 
-strategy = MLTrader(name='mlstrat', broker=broker, 
-                    parameters={"symbol":"SPY", 
-                                "cash_at_risk":.5})
+strategy = MLTrader(name='mlstrat', broker=broker)
 strategy.backtest(
     YahooDataBacktesting, 
     start_date, 
