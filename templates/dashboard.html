@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Lead Management{% endblock %}
+
+{% block content %}
+<section class="py-4">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="h3 mb-0">Lead Management Dashboard</h1>
+            </div>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1">Total Leads</p>
+                                <h3 class="mb-0">{{ stats.total_leads }}</h3>
+                            </div>
+                            <div class="stat-icon bg-primary">📊</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1">New Leads</p>
+                                <h3 class="mb-0">{{ stats.new_leads }}</h3>
+                            </div>
+                            <div class="stat-icon bg-success">✨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1">Appointments</p>
+                                <h3 class="mb-0">{{ stats.appointments_scheduled }}</h3>
+                            </div>
+                            <div class="stat-icon bg-info">📅</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1">Converted</p>
+                                <h3 class="mb-0">{{ stats.converted_leads }}</h3>
+                            </div>
+                            <div class="stat-icon bg-warning">🎯</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filters and Actions -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="btn-group" role="group">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary {% if not status_filter %}active{% endif %}">
+                        All Leads
+                    </a>
+                    <a href="{{ url_for('dashboard', status='new') }}" class="btn btn-outline-primary {% if status_filter == 'new' %}active{% endif %}">
+                        New
+                    </a>
+                    <a href="{{ url_for('dashboard', status='contacted') }}" class="btn btn-outline-primary {% if status_filter == 'contacted' %}active{% endif %}">
+                        Contacted
+                    </a>
+                    <a href="{{ url_for('dashboard', status='qualified') }}" class="btn btn-outline-primary {% if status_filter == 'qualified' %}active{% endif %}">
+                        Qualified
+                    </a>
+                    <a href="{{ url_for('dashboard', status='converted') }}" class="btn btn-outline-primary {% if status_filter == 'converted' %}active{% endif %}">
+                        Converted
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">+ New Lead</a>
+            </div>
+        </div>
+        
+        <!-- Leads Table -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Business Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Audit Score</th>
+                                <th>Appointment</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lead in leads %}
+                            <tr>
+                                <td>
+                                    <strong>{{ lead.business_name }}</strong><br>
+                                    <small class="text-muted">{{ lead.zip_code }}</small>
+                                </td>
+                                <td>{{ lead.contact_name }}</td>
+                                <td>{{ lead.email }}</td>
+                                <td>
+                                    <span class="badge bg-{{ 'success' if lead.status == 'converted' else 'primary' if lead.status == 'qualified' else 'info' if lead.status == 'contacted' else 'secondary' }}">
+                                        {{ lead.status|title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if lead.audit_completed %}
+                                        <span class="badge bg-{{ 'success' if lead.audit_score >= 70 else 'warning' if lead.audit_score >= 40 else 'danger' }}">
+                                            {{ lead.audit_score }}/100
+                                        </span>
+                                    {% else %}
+                                        <span class="text-muted">Pending</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if lead.appointment_scheduled %}
+                                        ✓ {{ lead.appointment_date.strftime('%m/%d %I:%M%p') if lead.appointment_date else 'Scheduled' }}
+                                    {% else %}
+                                        <span class="text-muted">Not scheduled</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ lead.created_at.strftime('%m/%d/%Y') }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ url_for('lead_detail', lead_id=lead.id) }}" class="btn btn-outline-primary">View</a>
+                                        <button class="btn btn-outline-secondary" onclick="sendEmail({{ lead.id }})">Email</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="8" class="text-center text-muted py-4">
+                                    No leads found. <a href="{{ url_for('index') }}">Create your first lead</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+</style>
+
+<script>
+function sendEmail(leadId) {
+    // Placeholder for email functionality
+    alert('Email functionality would be implemented here for lead ID: ' + leadId);
+}
+</script>
+{% endblock %}

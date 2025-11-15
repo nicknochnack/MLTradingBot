@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block title %}Free Business Listings Audit - Best Version Media{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-gradient text-white py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-4 fw-bold mb-4">
+                    Is Your Business Invisible Online?
+                </h1>
+                <p class="lead mb-4">
+                    Get a FREE comprehensive audit of your business listings across Google, Yelp, 
+                    and Facebook. Discover what's costing you customers right now.
+                </p>
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2">✓ Identify missing or incorrect information</li>
+                    <li class="mb-2">✓ Uncover visibility issues</li>
+                    <li class="mb-2">✓ Get actionable recommendations</li>
+                    <li class="mb-2">✓ 100% Free, No Obligation</li>
+                </ul>
+                <a href="#audit-form" class="btn btn-light btn-lg px-5 py-3 fw-bold">
+                    Get Your Free Audit Now
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4">
+                        <h3 class="text-dark mb-3">Why This Matters</h3>
+                        <div class="stat-box mb-3">
+                            <h2 class="text-primary mb-0">97%</h2>
+                            <p class="text-muted mb-0">of consumers search online for local businesses</p>
+                        </div>
+                        <div class="stat-box mb-3">
+                            <h2 class="text-primary mb-0">88%</h2>
+                            <p class="text-muted mb-0">trust online reviews as much as personal recommendations</p>
+                        </div>
+                        <div class="stat-box">
+                            <h2 class="text-primary mb-0">46%</h2>
+                            <p class="text-muted mb-0">of all Google searches are looking for local information</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Audit Form Section -->
+<section id="audit-form" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Request Your Free Listings Audit</h2>
+                        <p class="text-center text-muted mb-4">
+                            Takes less than 60 seconds. Get your detailed report instantly.
+                        </p>
+                        
+                        <form method="POST" action="{{ url_for('submit_audit_request') }}" id="auditForm">
+                            {{ form.hidden_tag() }}
+                            
+                            <div class="mb-3">
+                                {{ form.business_name.label(class="form-label fw-bold") }}
+                                {{ form.business_name(class="form-control form-control-lg", placeholder="e.g., Joe's Pizza") }}
+                                {% if form.business_name.errors %}
+                                    <div class="text-danger mt-1">{{ form.business_name.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.contact_name.label(class="form-label fw-bold") }}
+                                {{ form.contact_name(class="form-control form-control-lg", placeholder="Your full name") }}
+                                {% if form.contact_name.errors %}
+                                    <div class="text-danger mt-1">{{ form.contact_name.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.email.label(class="form-label fw-bold") }}
+                                {{ form.email(class="form-control form-control-lg", placeholder="your@email.com") }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger mt-1">{{ form.email.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.phone.label(class="form-label fw-bold") }}
+                                    {{ form.phone(class="form-control form-control-lg", placeholder="(555) 123-4567") }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.zip_code.label(class="form-label fw-bold") }}
+                                    {{ form.zip_code(class="form-control form-control-lg", placeholder="75056") }}
+                                    {% if form.zip_code.errors %}
+                                        <div class="text-danger mt-1">{{ form.zip_code.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                {{ form.address.label(class="form-label fw-bold") }}
+                                {{ form.address(class="form-control", placeholder="Full business address (optional)") }}
+                            </div>
+                            
+                            <div class="d-grid">
+                                {{ form.submit(class="btn btn-primary btn-lg py-3 fw-bold") }}
+                            </div>
+                            
+                            <p class="text-center text-muted mt-3 small">
+                                By submitting, you agree to receive your audit report and a follow-up 
+                                call to discuss the findings. No spam, ever.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">What You'll Discover in Your Audit</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                            <span class="fs-2">📍</span>
+                        </div>
+                        <h4 class="mb-3">Listing Accuracy</h4>
+                        <p class="text-muted">
+                            Find out if your business information is correct across all platforms. 
+                            Incorrect info costs you customers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                            <span class="fs-2">⭐</span>
+                        </div>
+                        <h4 class="mb-3">Review Analysis</h4>
+                        <p class="text-muted">
+                            See how your reviews compare and learn strategies to get more 
+                            positive feedback from customers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                            <span class="fs-2">📊</span>
+                        </div>
+                        <h4 class="mb-3">Visibility Score</h4>
+                        <p class="text-muted">
+                            Get a clear score showing how visible your business is online 
+                            compared to competitors.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Proof Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="mb-3">Trusted by Local Businesses</h2>
+            <p class="text-muted">
+                Join over 1,500 businesses across North America who trust Best Version Media
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="mb-3">⭐⭐⭐⭐⭐</div>
+                        <p class="mb-3">
+                            "The audit revealed issues I didn't even know existed. Fixed them and 
+                            saw a 40% increase in calls within a month!"
+                        </p>
+                        <p class="text-muted mb-0"><strong>- Sarah M.</strong>, Local Restaurant Owner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="mb-3">⭐⭐⭐⭐⭐</div>
+                        <p class="mb-3">
+                            "Best Version Media helped us dominate local search. Our phone hasn't 
+                            stopped ringing since we fixed our listings."
+                        </p>
+                        <p class="text-muted mb-0"><strong>- Mike T.</strong>, HVAC Company</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="mb-3">⭐⭐⭐⭐⭐</div>
+                        <p class="mb-3">
+                            "The free audit was eye-opening. I had no idea my business wasn't even 
+                            showing up on Google Maps!"
+                        </p>
+                        <p class="text-muted mb-0"><strong>- Jennifer L.</strong>, Boutique Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to Discover What's Holding Your Business Back?</h2>
+        <p class="lead mb-4">
+            Get your free audit in less than 60 seconds. No credit card required.
+        </p>
+        <a href="#audit-form" class="btn btn-light btn-lg px-5 py-3 fw-bold">
+            Get Your Free Audit Now
+        </a>
+    </div>
+</section>
+
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%);
+}
+
+.stat-box {
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+{% endblock %}

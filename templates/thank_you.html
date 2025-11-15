@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Thank You - Audit Request Received{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="success-icon mb-4">
+                    <span class="display-1">✓</span>
+                </div>
+                <h1 class="display-4 mb-4">Thank You, {{ lead.contact_name }}!</h1>
+                <p class="lead mb-4">
+                    We're analyzing <strong>{{ lead.business_name }}</strong>'s online presence right now.
+                </p>
+                
+                <div class="card shadow-lg border-0 mb-5">
+                    <div class="card-body p-5">
+                        <h3 class="mb-4">What Happens Next?</h3>
+                        <div class="timeline">
+                            <div class="timeline-item mb-4">
+                                <div class="timeline-icon bg-primary text-white">1</div>
+                                <div class="timeline-content">
+                                    <h5>Audit in Progress</h5>
+                                    <p class="text-muted mb-0">
+                                        We're scanning Google, Yelp, Facebook, and other platforms 
+                                        for your business listings.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item mb-4">
+                                <div class="timeline-icon bg-primary text-white">2</div>
+                                <div class="timeline-content">
+                                    <h5>Report Delivered (Within 5 Minutes)</h5>
+                                    <p class="text-muted mb-0">
+                                        You'll receive a comprehensive PDF report at 
+                                        <strong>{{ lead.email }}</strong> with your findings.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon bg-primary text-white">3</div>
+                                <div class="timeline-content">
+                                    <h5>Schedule Your Free Review Session</h5>
+                                    <p class="text-muted mb-0">
+                                        Book a 15-minute call to discuss your results and learn 
+                                        how we can help improve your online presence.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mb-5">
+                    <h5 class="alert-heading">Check Your Email!</h5>
+                    <p class="mb-0">
+                        We've sent a confirmation to <strong>{{ lead.email }}</strong>. 
+                        Your detailed audit report will arrive shortly.
+                    </p>
+                </div>
+                
+                <div class="card bg-light border-0 mb-4">
+                    <div class="card-body p-4">
+                        <h4 class="mb-3">While You Wait...</h4>
+                        <p class="mb-3">Learn more about how Best Version Media helps local businesses:</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-center">
+                            <a href="/about" class="btn btn-outline-primary">About Us</a>
+                            <a href="https://calendly.com/your-link/15min" class="btn btn-primary">
+                                Schedule Review Session Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-muted">
+                    Questions? Call us at <strong>(555) 123-4567</strong> or email 
+                    <strong>info@bvm-castlehills.com</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.success-icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #48bb78 0%, #2f855a 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+}
+
+.timeline {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.timeline-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.timeline-content {
+    flex: 1;
+}
+</style>
+{% endblock %}
